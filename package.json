@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-esp32",
+  "version": "1.0.0",
+  "description": "Nodejs + ESP32 + ReactJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "device": "nodemon server.js" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
