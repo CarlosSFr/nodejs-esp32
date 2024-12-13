@@ -6,7 +6,7 @@ router.use("/devices", devices)
 router.get("/", (req, res)=>{
     res.json({
         success: false,
-        message: "This page is only for logged users."
+        message: "This page is reserved."
     })
 })
 
