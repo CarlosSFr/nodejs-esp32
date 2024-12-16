@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const deviceSchema = require("./../schema/device_schema")
 
 router.get("/", (req, res) => {
     const devices = [{
@@ -21,8 +22,24 @@ router.get("/", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-    res.json(req.body)
-    console.log(req.body)
+    const device = new deviceSchema({
+        nome: req.body.nome,
+        processador: req.body.processador,
+        video: req.body.video
+    })
+    device.save()
+    .then((data) => {
+        res.json({
+            success: true,
+            message: data,
+        })
+    })
+    .catch((err) =>{
+        res.json({
+            success: false,
+            message: err,
+        })
+    })
 })
 
 
