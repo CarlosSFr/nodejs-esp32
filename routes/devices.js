@@ -1,45 +1,39 @@
 const router = require("express").Router()
-const deviceSchema = require("./../schema/device_schema")
+const Device = require("./../schema/device_schema")
 
-router.get("/", (req, res) => {
-    const devices = [{
-        id: 123,
-        nome: "Computador Médio Custo",
-        processador: "i5 11400f",
-        video: "RX 6750 XT",
-    },
-    {
-        id: 122,
-        nome: "Computador Baixo Custo",
-        processador: "Xeon 2684",
-        video: "RX 580"
+router.get("/", async (req, res) => {
+    try{
+        const listaDevices = await Device.find()
+        res.json({
+            success: true,
+            message: listaDevices,
+        })
+    }catch{
+        res.json({
+            success: false,
+            message: "Não foi possível listar os computadores!",
+        })
     }
-]
-    res.json({
-        success: true,
-        devices: devices,
-    }) 
 })
 
-router.post("/", (req, res) => {
-    const device = new deviceSchema({
+router.post("/", async (req, res) => {
+    const newDevice = new Device({
         nome: req.body.nome,
         processador: req.body.processador,
         video: req.body.video
     })
-    device.save()
-    .then((data) => {
+    try{
+        const saveNewDevice = await newDevice.save()
         res.json({
             success: true,
-            message: data,
+            message: saveNewDevice,
         })
-    })
-    .catch((err) =>{
+    }catch{
         res.json({
             success: false,
-            message: err,
+            message: "Não foi possível salvar no banco de dados!",
         })
-    })
+    }
 })
 
 
