@@ -36,5 +36,25 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.put("/:id", async (req, res)=> {
+    try{
+        const updateDeviceId = await Device.updateOne(
+            {_id: req.params.id},
+            {
+                processador: req.body.processador,
+                video: req.body.video
+            }
+        )
+        res.json({
+            success: true,
+            updated: updateDeviceId.modifiedCount
+        })
+    }catch{
+        res.json({
+            success: false,
+            message: "Não foi possível editar!",
+        })
+    }
+})
 
 module.exports = router
