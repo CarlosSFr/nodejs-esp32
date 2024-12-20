@@ -1,6 +1,6 @@
 import React from "react"
 
-const server = () => {
+const Teste = () => {
   fetch("/api")
     .then(resposta => {
       console.log(resposta)
@@ -10,8 +10,9 @@ const server = () => {
 export default function App() {
   return (
     <div>
-      <h1>"Hello World!"</h1>
-      {server()}
+      {Teste()}
+      <h1>Hello World!</h1>
+
     </div>
   )
 }
